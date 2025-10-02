@@ -43,7 +43,7 @@ export async function handlePayment(
   const endPoint =
     payementMethod === "cash"
       ? `orders/${cartId}`
-      : `orders/checkout-session/${cartId}?url=http://localhost:3000`;
+      : `orders/checkout-session/${cartId}?url=${process.env.NEXTAUTH_URL}`;
   try {
     const res = await fetch(
       `${process.env.NEXTAUTH_API_BASE_URL}/${endPoint}`,
