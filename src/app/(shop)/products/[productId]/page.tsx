@@ -16,7 +16,7 @@ export default async function ProductDetails({
 
   return (
     <>
-      <section className="px-40 pb-20">
+      <section className="px-10 py-10 lg:px-40 lg:pb-20">
         <div className="container mx-auto">
           <ProductDetailsSection product={product} />
         </div>

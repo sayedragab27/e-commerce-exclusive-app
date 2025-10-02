@@ -15,7 +15,7 @@ export default async function ProductDetails({
   );
 
   return (
-    <section className="px-40 pb-20">
+    <section className="px-10 py-10 lg:px-40 lg:pb-20">
       <div className="container mx-auto">
         {products && products.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
