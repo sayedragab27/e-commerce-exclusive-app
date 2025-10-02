@@ -66,7 +66,7 @@ export default function ChangePasswordPage() {
   }, [updatePasswordFormAction, router, startTransition, update]);
 
   return (
-    <section className="px-40 py-20 flex items-center justify-center ">
+    <section className="px-10 py-10 lg:px-40 lg:pb-20 flex items-center justify-center ">
       <div className="container max-w-2xl mx-auto shadow-md p-9 shadow-gray-300 rounded">
         {!updatePasswordFormAction.success &&
           updatePasswordFormAction.message &&

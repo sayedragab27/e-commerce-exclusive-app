@@ -54,7 +54,7 @@ export default function CartPage() {
     }
   }
   return (
-    <section className="py-4 px-40">
+    <section className="px-10 py-10 lg:px-40 lg:pb-20">
       <div className="container mx-auto">
         {cartDetails && cartDetails?.data.products.length > 0 ? (
           <>

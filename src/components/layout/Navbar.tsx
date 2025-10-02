@@ -50,7 +50,7 @@ const Navbar = () => {
   const { wishlistDetails } = useWihlist();
 
   return (
-    <section className="py-4 px-40 bg-white sticky top-0 z-50">
+    <section className="py-4 px-10 lg:px-40  bg-white sticky top-0 z-50">
       <div className="container mx-auto">
         <nav className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
@@ -140,17 +140,6 @@ const Navbar = () => {
                     </Tooltip>
                   </Link>
                   <DropdownMenu>
-                    {/* <DropdownMenuTrigger asChild>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button className="cursor-pointer"></button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>My Account</p>
-                        </TooltipContent>
-                      </Tooltip>
-                     
-                    </DropdownMenuTrigger> */}
                     <DropdownMenuTrigger asChild>
                       {/* <Button variant="outline"> */}
                       <User className="size-8 cursor-pointer" />
@@ -159,11 +148,6 @@ const Navbar = () => {
                     <DropdownMenuContent>
                       <DropdownMenuLabel>My Account</DropdownMenuLabel>
                       <DropdownMenuSeparator />
-                      {/* <DropdownMenuItem>
-                        <Link href="/profile" className="mr-2">
-                          Profile
-                        </Link>
-                      </DropdownMenuItem> */}
                       <DropdownMenuItem>
                         <Link href="/change-password" className="mr-2">
                           Change Password
@@ -177,30 +161,9 @@ const Navbar = () => {
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                  {/* <Button
-                    variant="outline"
-                    onClick={() => signOut({ callbackUrl: "/login" })}
-                  >
-                    Sign out
-                  </Button> */}
                 </div>
-                {/* <Link href="/profile" className="mr-2">
-                  {session?.user.name}
-                </Link>
-                <Button
-                  variant="outline"
-                  onClick={() => signOut({ callbackUrl: "/login" })}
-                >
-                  Sign out
-                </Button> */}
               </>
             )}
-            {/* <Button variant="outline" asChild>
-              <Link href="/login">Sign in</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/register">Sign up</Link>
-            </Button> */}
           </div>
           <Sheet>
             <SheetTrigger asChild className="lg:hidden">
@@ -236,20 +199,20 @@ const Navbar = () => {
                     </Link>
                   ))}
                   {status === "authenticated" && (
-                    <NavigationMenuItem>
-                      <Link
-                        href={"/allorders"}
-                        className={cn(
-                          navigationMenuTriggerStyle(),
-                          pathname === "/allorders" && "!text-red-500 underline"
-                        )}
-                      >
-                        Orders
-                      </Link>
-                    </NavigationMenuItem>
+                    // <NavigationMenuItem>
+                    <Link
+                      href={"/allorders"}
+                      className={cn(
+                        "font-medium",
+                        pathname === "/allorders" && "!text-red-500 underline"
+                      )}
+                    >
+                      Orders
+                    </Link>
+                    // </NavigationMenuItem>
                   )}
                 </div>
-                <div className="hidden items-center gap-4 lg:flex">
+                <div className="flex justify-center items-center gap-4 lg:flex">
                   {status === "loading" ? (
                     <>loading...</>
                   ) : status === "unauthenticated" ? (
@@ -302,25 +265,13 @@ const Navbar = () => {
                         </Link>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <button className="cursor-pointer">
-                                  <User className="size-8" />
-                                </button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>My Account</p>
-                              </TooltipContent>
-                            </Tooltip>
+                            {/* <Button variant="outline"> */}
+                            <User className="size-8 cursor-pointer" />
+                            {/* </Button> */}
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>
-                              <Link href="/profile" className="mr-2">
-                                Profile
-                              </Link>
-                            </DropdownMenuItem>
                             <DropdownMenuItem>
                               <Link href="/change-password" className="mr-2">
                                 Change Password
@@ -334,30 +285,9 @@ const Navbar = () => {
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
-                        {/* <Button
-                    variant="outline"
-                    onClick={() => signOut({ callbackUrl: "/login" })}
-                  >
-                    Sign out
-                  </Button> */}
                       </div>
-                      {/* <Link href="/profile" className="mr-2">
-                  {session?.user.name}
-                </Link>
-                <Button
-                  variant="outline"
-                  onClick={() => signOut({ callbackUrl: "/login" })}
-                >
-                  Sign out
-                </Button> */}
                     </>
                   )}
-                  {/* <Button variant="outline" asChild>
-              <Link href="/login">Sign in</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/register">Sign up</Link>
-            </Button> */}
                 </div>
               </div>
             </SheetContent>

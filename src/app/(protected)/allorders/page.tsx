@@ -18,64 +18,6 @@ import { OrdersType } from "@/interfaces/orders.interface";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-// Your orders data (replace with fetched API response)
-// const orders = [
-//   {
-//     shippingAddress: {
-//       details: "msdj",
-//       phone: "01001902993",
-//       city: "cairo",
-//     },
-//     taxPrice: 0,
-//     shippingPrice: 0,
-//     totalOrderPrice: 648,
-//     paymentMethodType: "card",
-//     isPaid: true,
-//     isDelivered: false,
-//     _id: "68cbdbb1c763e588664e46b0",
-//     user: {
-//       _id: "68c58caa1d3ea654d573f425",
-//       name: "sayed ragab",
-//       email: "sayedragab2272@gmail.com",
-//       phone: "01020723903",
-//     },
-//     cartItems: [
-//       {
-//         count: 1,
-//         _id: "68c8bc3e0f17eb72b5d9114a",
-//         product: {
-//           _id: "6428e997dc1175abc65ca0a1",
-//           title: "Woman Shawl",
-//           imageCover:
-//             "https://ecommerce.routemisr.com/Route-Academy-products/1680402838276-cover.jpeg",
-//           brand: {
-//             name: "DeFacto",
-//           },
-//         },
-//         price: 149,
-//       },
-//       {
-//         count: 1,
-//         _id: "68c8bc440f17eb72b5d9116a",
-//         product: {
-//           _id: "6428e778dc1175abc65ca08a",
-//           title: "Woman Brown Long Sleeve Tunic LT.CAMEL",
-//           imageCover:
-//             "https://ecommerce.routemisr.com/Route-Academy-products/1680402295928-cover.jpeg",
-//           brand: {
-//             name: "DeFacto",
-//           },
-//         },
-//         price: 499,
-//       },
-//     ],
-//     paidAt: "2025-09-18T10:15:13.057Z",
-//     createdAt: "2025-09-18T10:15:13.060Z",
-//     updatedAt: "2025-09-18T10:15:13.060Z",
-//     id: 64702,
-//   },
-// ];
-
 export default function AllordersPage() {
   const [orders, setOrders] = useState<OrdersType>([]);
   useEffect(() => {
@@ -91,7 +33,7 @@ export default function AllordersPage() {
     fetchOrders();
   }, []);
   return (
-    <section className="px-40 pb-20 mt-10">
+    <section className="px-10 py-10 lg:px-40 lg:pb-20 mt-3 lg:mt-2">
       <div className="container mx-auto">
         {orders ? (
           <Card className="w-full shadow-md rounded-2xl">

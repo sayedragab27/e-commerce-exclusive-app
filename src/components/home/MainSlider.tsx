@@ -16,7 +16,7 @@ const images = [
 
 export default function MainSlider() {
   return (
-    <section className="px-40 pb-20">
+    <section className="px-10 pb-10 lg:px-40 lg:pb-20">
       <div className="container mx-auto">
         <Swiper
           {...mainSliderOptions}
