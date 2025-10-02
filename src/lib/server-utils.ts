@@ -3,7 +3,10 @@ import { decode } from "next-auth/jwt";
 import { cookies } from "next/headers";
 
 export async function gerDecodedToken() {
-  const encodedToken = (await cookies()).get("next-auth.session-token")?.value;
+  const cookieStored = await cookies();
+  const encodedToken =
+    cookieStored.get("next-auth.session-token")?.value ||
+    cookieStored.get("__Secure-next-auth.session-token")?.value;
   const decodedToken = await decode({
     token: encodedToken,
     secret: process.env.AUTH_SECRET!,
