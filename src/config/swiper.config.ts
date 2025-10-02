@@ -15,12 +15,12 @@ export const defaultSwiperOptions: SwiperOptions = {
 // ✅ Named variations (extend default with overrides)
 export const mainSliderOptions: SwiperOptions = {
   ...defaultSwiperOptions,
-  // loop: true,
-  // // speed: 1000,
-  // autoplay: {
-  //   delay: 1000,
-  //   disableOnInteraction: false,
-  // },
+  loop: true,
+  speed: 2000,
+  autoplay: {
+    delay: 1000,
+    disableOnInteraction: false,
+  },
 };
 
 export const categoriesSliderOptions: SwiperOptions = {
