@@ -3,12 +3,14 @@ import { IProduct } from "@/interfaces/products.interface";
 import { Star } from "lucide-react";
 import ProductSlider from "./ProductSlider";
 import AddProductToCartBtn from "./AddProductToCartBtn";
+import { useSession } from "next-auth/react";
 
 export default function ProductDetailsSection({
   product,
 }: {
   product: IProduct;
 }) {
+  const { status } = useSession();
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 py-12 grid grid-cols-1 lg:grid-cols-3 gap-x-12 gap-y-10">
       {/* Product Images Slider */}
@@ -42,11 +44,13 @@ export default function ProductDetailsSection({
         </p>
 
         {/* Add to Cart */}
-        <AddProductToCartBtn
-          productId={product._id}
-          className="w-full py-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition-colors duration-300"
-          variant="destructive"
-        />
+        {status === "authenticated" && (
+          <AddProductToCartBtn
+            productId={product._id}
+            className="w-full py-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition-colors duration-300"
+            variant="destructive"
+          />
+        )}
 
         {/* Optional extra info */}
         <div className="mt-6 text-sm text-gray-500">
