@@ -3,23 +3,25 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { getUserOrders } from "@/api/services/orders.service";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { getUserOrders } from "@/api/services/orders.service";
 import { OrdersType } from "@/interfaces/orders.interface";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { CheckCircle, XCircle, Truck, Clock } from "lucide-react";
 
 export default function AllordersPage() {
   const [orders, setOrders] = useState<OrdersType>([]);
+
   useEffect(() => {
     async function fetchOrders() {
       const response = await getUserOrders();
@@ -32,114 +34,128 @@ export default function AllordersPage() {
     }
     fetchOrders();
   }, []);
+
   return (
     <section className="px-10 py-10 lg:px-40 lg:pb-20 mt-3 lg:mt-2">
       <div className="container mx-auto">
-        {orders ? (
-          <Card className="w-full shadow-md rounded-2xl">
+        {orders && orders.length > 0 ? (
+          <Card className="shadow-lg rounded-2xl">
             <CardHeader>
-              <CardTitle className="text-xl font-bold">All Orders</CardTitle>
+              <CardTitle className="text-2xl font-bold">
+                Orders Overview
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableCaption>A list of all customer orders.</TableCaption>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Order ID</TableHead>
-                    <TableHead>User</TableHead>
-                    <TableHead>Items</TableHead>
-                    <TableHead>Total</TableHead>
-                    <TableHead>Payment Method</TableHead>
-                    <TableHead>Payment Status</TableHead>
-                    <TableHead>Delivery Status</TableHead>
-                    <TableHead>Date</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {orders &&
-                    orders.map((order) => (
-                      <TableRow key={order._id}>
-                        <TableCell className="font-medium">
-                          {order.id}
+              <div className="overflow-x-auto rounded-lg border">
+                <Table>
+                  <TableHeader className="bg-gray-50 sticky top-0 z-10">
+                    <TableRow>
+                      <TableHead className="w-[120px]">Order ID</TableHead>
+                      <TableHead>User</TableHead>
+                      <TableHead>Items</TableHead>
+                      <TableHead>Total</TableHead>
+                      <TableHead>Payment</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Date</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {orders.map((order) => (
+                      <TableRow
+                        key={order._id}
+                        className="hover:bg-gray-50 transition-colors"
+                      >
+                        <TableCell className="font-semibold">
+                          #{order.id}
                         </TableCell>
+
+                        {/* User Info */}
                         <TableCell>
                           <div>
-                            <p className="font-semibold">{order.user.name}</p>
-                            <p className="text-sm text-muted-foreground">
+                            <p className="font-medium">{order.user.name}</p>
+                            <p className="text-xs text-muted-foreground">
                               {order.user.email}
                             </p>
                           </div>
                         </TableCell>
+
+                        {/* Items */}
                         <TableCell>
-                          <div className="flex flex-col gap-2">
-                            {order.cartItems.map((item) => (
+                          <div className="flex flex-col gap-1">
+                            {order.cartItems.slice(0, 2).map((item) => (
                               <div
                                 key={item._id}
-                                className="flex items-center gap-3 text-sm"
+                                className="flex items-center gap-2 text-xs"
                               >
                                 <Image
                                   src={item.product.imageCover}
                                   alt={item.product.title}
-                                  width={40}
-                                  height={40}
+                                  width={28}
+                                  height={28}
                                   className="rounded-md object-cover"
                                 />
-                                <div>
-                                  <p>{item.product.title}</p>
-                                  <p className="text-muted-foreground">
-                                    x{item.count} – {item.price} EGP
-                                  </p>
-                                </div>
+                                <span className="truncate max-w-[120px]">
+                                  {item.product.title}
+                                </span>
                               </div>
                             ))}
+                            {order.cartItems.length > 2 && (
+                              <span className="text-xs text-muted-foreground">
+                                +{order.cartItems.length - 2} more
+                              </span>
+                            )}
                           </div>
                         </TableCell>
+
+                        {/* Total */}
                         <TableCell className="font-semibold">
                           {order.totalOrderPrice} EGP
                         </TableCell>
-                        <TableCell>{order.paymentMethodType}</TableCell>
+
+                        {/* Payment */}
                         <TableCell>
                           {order.isPaid ? (
-                            <span className="text-green-600 font-medium block mx-auto ">
-                              Paid
-                            </span>
+                            <Badge className="bg-green-100 text-green-700 flex items-center gap-1">
+                              <CheckCircle className="w-3 h-3" /> Paid
+                            </Badge>
                           ) : (
-                            <span className="text-red-600 font-medium  block mx-auto">
-                              Unpaid
-                            </span>
+                            <Badge className="bg-red-100 text-red-700 flex items-center gap-1">
+                              <XCircle className="w-3 h-3" /> Unpaid
+                            </Badge>
                           )}
                         </TableCell>
+
+                        {/* Delivery */}
                         <TableCell>
                           {order.isDelivered ? (
-                            <span className="text-green-600 font-medium  block mx-auto">
-                              Delivered
-                            </span>
+                            <Badge className="bg-green-100 text-green-700 flex items-center gap-1">
+                              <Truck className="w-3 h-3" /> Delivered
+                            </Badge>
                           ) : (
-                            <span className="text-orange-600 font-medium block mx-auto">
-                              Pending
-                            </span>
+                            <Badge className="bg-orange-100 text-orange-700 flex items-center gap-1">
+                              <Clock className="w-3 h-3" /> Pending
+                            </Badge>
                           )}
                         </TableCell>
-                        <TableCell>
+
+                        {/* Date */}
+                        <TableCell className="text-xs text-muted-foreground">
                           {new Date(order.createdAt).toLocaleDateString()}
                         </TableCell>
                       </TableRow>
                     ))}
-                </TableBody>
-              </Table>
+                  </TableBody>
+                </Table>
+              </div>
             </CardContent>
           </Card>
         ) : (
-          <>
-            <div className="flex flex-col items-center justify-center">
-              <h1 className="text-2xl font-bold text-center">
-                Your Cart is Empty
-              </h1>
-              <Button variant={"outline"}>
-                <Link href={"/products"}>Return to Shop</Link>
-              </Button>
-            </div>
-          </>
+          <div className="flex flex-col items-center justify-center space-y-4">
+            <h1 className="text-2xl font-bold text-center">No Orders Found</h1>
+            <Button asChild variant="outline">
+              <Link href={"/products"}>Return to Shop</Link>
+            </Button>
+          </div>
         )}
       </div>
     </section>
