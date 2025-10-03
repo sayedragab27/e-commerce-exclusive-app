@@ -174,10 +174,7 @@ const Navbar = () => {
             <SheetContent side="top" className="max-h-screen overflow-auto">
               <SheetHeader>
                 <SheetTitle>
-                  <Link
-                    href="https://www.shadcnblocks.com"
-                    className="flex items-center gap-2"
-                  >
+                  <Link href="/" className="flex items-center gap-2">
                     <span className="text-lg font-semibold tracking-tighter">
                       Exclusive
                     </span>
